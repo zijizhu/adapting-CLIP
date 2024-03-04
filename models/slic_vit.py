@@ -126,11 +126,11 @@ class SLICViT(nn.Module):
             setattr(self, key, args[key])
         # forward
         h, w = im.shape[:2]
-        heatmap = self.get_heatmap(im, text)
+        im_processed, heatmap = self.get_heatmap(im, text)
         bbox = self.box_from_heatmap(heatmap)
         bbox[:, ::2] = bbox[:, ::2] * w / 224.
         bbox[:, 1::2] = bbox[:, 1::2] * h / 224.
         # restore paramters
         for key in args:
             setattr(self, key, _args[key])
-        return bbox, heatmap
+        return im_processed, bbox, heatmap

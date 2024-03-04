@@ -38,4 +38,4 @@ class ResNetHighRes(SLICViT):
 
             heatmap = np.exp(heatmap / self.temperature)
 
-        return heatmap
+        return im, heatmap
